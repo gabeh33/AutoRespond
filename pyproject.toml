@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "detection-as-code"
+version = "0.1.0"
+description = "Sigma detection-as-code pipeline with tests and CI"
+requires-python = ">=3.10"
+dependencies = [
+    "pysigma>=2.0.1",
+    "pytest>=9.1.1"
+]
+
+[tool.setuptools]
+packages = ["harness"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

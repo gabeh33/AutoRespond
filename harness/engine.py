@@ -9,9 +9,17 @@ from pathlib import Path
 from sigma.validation import SigmaValidator
 from sigma.validators.core.metadata import IdentifierExistenceIssue
 
-# Load the test rule from the rules folder. This is a SigmaCollection instance so can iterate through the rule using .rules
-# This loads rules in the rules\testing folder
-test_collection = SigmaCollection.load_ruleset([Path(".\\rules\\testing")])
+# Anchor the root of the repo to the AutoRespond/ folder
+ROOT = Path(__file__).resolve().parent.parent 
+TEST_RULES = (ROOT / "rules" / "testing")
 
-for rule in test_collection:
-    print(rule.title)
+def load_rules(folder: Path) -> SigmaCollection:
+    """ Given a Path for a load the Sigma rules in that folder. Returns a SigmaCollection"""
+    if not folder.is_dir():
+        raise FileNotFoundError(f"Could not find folder: {folder}")
+    return SigmaCollection.load_ruleset([folder])
+
+if __name__ == "__main__":
+    tests = load_rules(TEST_RULES)
+    for rule in tests.rules:
+        print(rule.title)
