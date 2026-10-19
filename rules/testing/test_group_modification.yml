@@ -1,0 +1,17 @@
+# This is a sample rule that was found here: https://sigmahq.io/docs/basics/rules.html
+# Its purpose for me is to confirm the code importing and parsing the rule functions without addressing the content of the rule itself
+# All credit to sigmahq.io
+title: Group Modification Logging
+description: Triggers when an account is added to or removed from any group assigned administrative privileges.
+logsource:
+  product: windows
+  service: system
+detection: 
+  selection:
+    EventID:
+      - 4728 
+      - 4729 
+      - 4730
+  condition: selection
+falsepositives:
+  - Unknown
