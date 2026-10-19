@@ -1,0 +1,30 @@
+# Sigma rule for checking for deletions or attempts to stop logging via CloudTrial, AWS's logging service
+title: CloudTrail Logging Stopped
+id: ce1f3758-3aff-4245-97e9-4be5f6c7332e
+status: test
+description: Detected attempts to disable, delete, or update of a CloudTrail
+references: 
+  - https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_StopLogging.html
+  - https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_UpdateTrail.html
+  - https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_DeleteTrail.html
+author: Gabe Holmes
+date: 2026-10-19
+modified: 2026-10-19
+tags:
+  - attack.defense_impairment
+  - attack.t1685.002
+logsource: 
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: cloudtrail.amazonaws.com
+    eventName:
+      - DeleteTrail
+      - UpdateTrail
+      - StopLogging
+  condition: selection
+falsepositives: 
+  - Infrastructure as code deployments and pipelines
+  - Account decommissioning
+level: high
