@@ -9,7 +9,8 @@ description = "Sigma detection-as-code pipeline with tests and CI"
 requires-python = ">=3.10"
 dependencies = [
     "pysigma>=2.0.1",
-    "pytest>=9.1.1"
+    "pytest>=9.1.1",
+    "pandas"
 ]
 
 [tool.setuptools]

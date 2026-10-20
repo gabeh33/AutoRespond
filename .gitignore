@@ -1,3 +1,5 @@
 # Ignore these files and folders
 .venv/
 .pytest_cache/
+detection_as_code.egg-info/
+*.pyc
